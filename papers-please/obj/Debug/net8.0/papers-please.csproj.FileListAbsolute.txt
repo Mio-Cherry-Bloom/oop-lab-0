@@ -1,0 +1,15 @@
+C:\Users\saval\Desktop\oop-lab-0\papers-please\bin\Debug\net8.0\papers-please.exe
+C:\Users\saval\Desktop\oop-lab-0\papers-please\bin\Debug\net8.0\papers-please.deps.json
+C:\Users\saval\Desktop\oop-lab-0\papers-please\bin\Debug\net8.0\papers-please.runtimeconfig.json
+C:\Users\saval\Desktop\oop-lab-0\papers-please\bin\Debug\net8.0\papers-please.dll
+C:\Users\saval\Desktop\oop-lab-0\papers-please\bin\Debug\net8.0\papers-please.pdb
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.AssemblyInfoInputs.cache
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.AssemblyInfo.cs
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.csproj.CoreCompileInputs.cache
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.sourcelink.json
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.dll
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\refint\papers-please.dll
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.pdb
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\papers-please.genruntimeconfig.cache
+C:\Users\saval\Desktop\oop-lab-0\papers-please\obj\Debug\net8.0\ref\papers-please.dll
