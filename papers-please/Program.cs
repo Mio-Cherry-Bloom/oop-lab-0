@@ -10,9 +10,14 @@ public class Individual
 
     public Individual() {}
 
-    public void PrintId()
+    public void PrintDetails()
     {
         Console.WriteLine($"Id: {Id}");
+        Console.WriteLine($"Is Humanoid: {IsHumanoid}");
+        Console.WriteLine($"Planet: {Planet}");
+        Console.WriteLine($"Age: {Age}");
+        Console.WriteLine("Traits: " + (Traits != null ? string.Join(", ", Traits) : "None"));
+        Console.WriteLine();
     }
 }
 
@@ -30,20 +35,20 @@ public class Program
         InputWrapper inputWrapper = JsonSerializer.Deserialize<InputWrapper>(jsonData, 
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         List<Individual> individuals = inputWrapper.Input;
-        Console.WriteLine("Even Ids:");
+        Console.WriteLine("Details of individuals with even Ids:");
         foreach (var individual in individuals)
         {
             if (individual.Id % 2 == 0)
             {
-                individual.PrintId();
+                individual.PrintDetails();
             }
         }
-        Console.WriteLine("\nOdd Ids:");
+        Console.WriteLine("Details of individuals with odd Ids:");
         foreach (var individual in individuals)
         {
             if (individual.Id % 2 != 0)
             {
-                individual.PrintId();
+                individual.PrintDetails();
             }
         }
     }
