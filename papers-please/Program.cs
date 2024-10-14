@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 public class Individual
 {
@@ -19,14 +16,20 @@ public class Individual
     }
 }
 
+public class InputWrapper
+{
+    public List<Individual> Input { get; set; }
+}
+
 public class Program
 {
     public static void Main()
     {
         string jsonFilePath = @"..\..\..\..\input.json";
         string jsonData = File.ReadAllText(jsonFilePath);
-        List<Individual> individuals = JsonSerializer.Deserialize<List<Individual>>(jsonData, 
+        InputWrapper inputWrapper = JsonSerializer.Deserialize<InputWrapper>(jsonData, 
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        List<Individual> individuals = inputWrapper.Input;
         Console.WriteLine("Even Ids:");
         foreach (var individual in individuals)
         {
