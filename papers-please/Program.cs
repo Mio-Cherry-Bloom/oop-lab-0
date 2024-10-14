@@ -10,14 +10,104 @@ public class Individual
 
     public Individual() {}
 
-    public void PrintDetails()
+    public string Classify()
     {
-        Console.WriteLine($"Id: {Id}");
-        Console.WriteLine($"Is Humanoid: {IsHumanoid}");
-        Console.WriteLine($"Planet: {Planet}");
-        Console.WriteLine($"Age: {Age}");
-        Console.WriteLine("Traits: " + (Traits != null ? string.Join(", ", Traits) : "None"));
-        Console.WriteLine();
+        var traitsList = Traits ?? new List<string>();
+        var isHumanoidValue = IsHumanoid;
+        var planetValue = Planet ?? string.Empty;
+        var ageValue = Age;
+
+        string classification = "Unknown Universe";
+
+        if (isHumanoidValue == false)
+        {
+            if (planetValue == "Kashyyyk") classification = "Star Wars Universe (Wookie)";
+            else if (planetValue == "Endor") classification = "Star Wars Universe (Ewok)";
+            else if (planetValue == "Vogsphere") classification = "Hitchhiker's Universe (Vogons)";
+            else if (ageValue > 200) classification = "Star Wars Universe (Wookie)";
+            else if (ageValue > 60)
+            {
+                if (traitsList.Contains("HAIRY") || traitsList.Contains("TALL")) classification = "Star Wars Universe (Wookie)";
+                else if (traitsList.Contains("BULKY") || traitsList.Contains("GREEN")) classification = "Hitchhiker's Universe (Vogons)";
+            }
+            else
+            {
+                if (traitsList.Contains("BULKY") || traitsList.Contains("GREEN")) classification = "Hitchhiker's Universe (Vogons)";
+                else if (traitsList.Contains("TALL")) classification = "Star Wars Universe (Wookie)";
+                else if (traitsList.Contains("SHORT")) classification = "Star Wars Universe (Ewok)";
+            }
+        }
+        else if (isHumanoidValue == true)
+        {
+            if (planetValue == "Asgard") classification = "Marvel Universe (Asgardian)";
+            else if (planetValue == "Betelgeuse") classification = "Hitchhiker's Universe (Betelgeusian)";
+            else if (planetValue == "Earth")
+            {
+                if (ageValue > 200) classification = "Lord of the Rings Universe (Elf)";
+                else if (traitsList.Contains("BLONDE") || traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                else if (traitsList.Contains("SHORT") || traitsList.Contains("BULKY")) classification = "Lord of the Rings Universe (Dwarf)";
+            }
+            else
+            {
+                if (ageValue > 5000) classification = "Lord of the Rings Universe (Elf)";
+                else if (ageValue > 200)
+                {
+                    if (traitsList.Contains("TALL")) classification = "Marvel Universe (Asgardian)";
+                    else if (traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                }
+                else
+                {
+                    if (traitsList.Contains("EXTRA_ARMS") || traitsList.Contains("EXTRA_HEAD")) classification = "Hitchhiker's Universe (Betelgeusian)";
+                    else if (traitsList.Contains("SHORT") || traitsList.Contains("BULKY")) classification = "Lord of the Rings Universe (Dwarf)";
+                    else if (traitsList.Contains("TALL")) classification = "Marvel Universe (Asgardian)";
+                    else if (traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                }
+            }
+        }
+        else
+        {
+            if (planetValue == "Kashyyyk") classification = "Star Wars Universe (Wookie)";
+            else if (planetValue == "Endor") classification = "Star Wars Universe (Ewok)";
+            else if (planetValue == "Asgard") classification = "Marvel Universe (Asgardian)";
+            else if (planetValue == "Betelgeuse") classification = "Hitchhiker's Universe (Betelgeusian)";
+            else if (planetValue == "Vogsphere") classification = "Hitchhiker's Universe (Vogons)";
+            else if (planetValue == "Earth")
+            {
+                if (ageValue > 200) classification = "Lord of the Rings Universe (Elf)";
+                else if (traitsList.Contains("BLONDE") || traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                else if (traitsList.Contains("SHORT") || traitsList.Contains("BULKY")) classification = "Lord of the Rings Universe (Dwarf)";
+            }
+            else
+            {
+                if (ageValue > 5000) classification = "Lord of the Rings Universe (Elf)";
+                else if (ageValue > 400)
+                {
+                    if (traitsList.Contains("TALL")) classification = "Marvel Universe (Asgardian)";
+                    else if (traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                }
+                else if (ageValue > 60)
+                {
+                    if (traitsList.Contains("EXTRA_ARMS") || traitsList.Contains("EXTRA_HEAD")) classification = "Hitchhiker's Universe (Betelgeusian)";
+                    else if (traitsList.Contains("GREEN")) classification = "Hitchhiker's Universe (Vogons)";
+                    else if (traitsList.Contains("SHORT")) classification = "Lord of the Rings Universe (Dwarf)";
+                    else if (traitsList.Contains("HAIRY")) classification = "Star Wars Universe (Wookie)";
+                    else if (traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                    else if (traitsList.Contains("BLONDE") && traitsList.Contains("TALL")) classification = "Marvel Universe (Asgardian)";
+                }
+                else
+                {
+                    if (traitsList.Contains("EXTRA_ARMS") || traitsList.Contains("EXTRA_HEAD")) classification = "Hitchhiker's Universe (Betelgeusian)";
+                    else if (traitsList.Contains("GREEN")) classification = "Hitchhiker's Universe (Vogons)";
+                    else if (traitsList.Contains("SHORT") && traitsList.Contains("BULKY")) classification = "Lord of the Rings Universe (Dwarf)";
+                    else if (traitsList.Contains("HAIRY") && traitsList.Contains("TALL")) classification = "Star Wars Universe (Wookie)";
+                    else if (traitsList.Contains("POINTY_EARS")) classification = "Lord of the Rings Universe (Elf)";
+                    else if (traitsList.Contains("BLONDE") && traitsList.Contains("TALL")) classification = "Marvel Universe (Asgardian)";
+                    else if (traitsList.Contains("SHORT") && traitsList.Contains("HAIRY")) classification = "Marvel Universe (Asgardian)";
+                }
+            }
+        }
+
+        return classification;
     }
 }
 
@@ -32,24 +122,14 @@ public class Program
     {
         string jsonFilePath = @"..\..\..\..\input.json";
         string jsonData = File.ReadAllText(jsonFilePath);
-        InputWrapper inputWrapper = JsonSerializer.Deserialize<InputWrapper>(jsonData, 
+        InputWrapper inputWrapper = JsonSerializer.Deserialize<InputWrapper>(jsonData,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         List<Individual> individuals = inputWrapper.Input;
-        Console.WriteLine("Details of individuals with even Ids:");
+
         foreach (var individual in individuals)
         {
-            if (individual.Id % 2 == 0)
-            {
-                individual.PrintDetails();
-            }
-        }
-        Console.WriteLine("Details of individuals with odd Ids:");
-        foreach (var individual in individuals)
-        {
-            if (individual.Id % 2 != 0)
-            {
-                individual.PrintDetails();
-            }
+            string classification = individual.Classify();
+            Console.WriteLine($"Id: {individual.Id}, Classification: {classification}");
         }
     }
 }
