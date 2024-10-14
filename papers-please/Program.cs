@@ -116,6 +116,29 @@ public class InputWrapper
     public List<Individual> Input { get; set; }
 }
 
+public class View
+{
+    public List<Individual> Individuals { get; set; }
+
+    public View(List<Individual> individuals)
+    {
+        Individuals = individuals;
+    }
+
+    public void WriteToJsonFiles()
+    {
+        var hitchhikerIndividuals = Individuals.Where(i => i.Classify().Contains("Hitchhiker")).ToList();
+        var marvelIndividuals = Individuals.Where(i => i.Classify().Contains("Marvel")).ToList();
+        var ringsIndividuals = Individuals.Where(i => i.Classify().Contains("Lord of the Rings")).ToList();
+        var starWarsIndividuals = Individuals.Where(i => i.Classify().Contains("Star Wars")).ToList();
+
+        File.WriteAllText(@"..\..\..\..\output\hitchhiker.json", JsonSerializer.Serialize(hitchhikerIndividuals, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(@"..\..\..\..\output\marvel.json", JsonSerializer.Serialize(marvelIndividuals, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(@"..\..\..\..\output\rings.json", JsonSerializer.Serialize(ringsIndividuals, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(@"..\..\..\..\output\starwars.json", JsonSerializer.Serialize(starWarsIndividuals, new JsonSerializerOptions { WriteIndented = true }));
+    }
+}
+
 public class Program
 {
     public static void Main()
@@ -125,11 +148,7 @@ public class Program
         InputWrapper inputWrapper = JsonSerializer.Deserialize<InputWrapper>(jsonData,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         List<Individual> individuals = inputWrapper.Input;
-
-        foreach (var individual in individuals)
-        {
-            string classification = individual.Classify();
-            Console.WriteLine($"Id: {individual.Id}, Classification: {classification}");
-        }
+        View view = new View(individuals);
+        view.WriteToJsonFiles();
     }
 }
